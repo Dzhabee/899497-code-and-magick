@@ -4,16 +4,50 @@ var userDialog = document.querySelector('.setup');
 userDialog.classList.remove('hidden');
 var similarListElement = userDialog.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
-var wizardName = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
-var wizardLastName = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
-var wizardCoatColar = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
-var wizardEyesColor = ['black', 'red', 'blue', 'yellow', 'green'];
+var wizardName = [
+  'Иван',
+  'Хуан Себастьян',
+  'Мария',
+  'Кристоф',
+  'Виктор',
+  'Юлия',
+  'Люпита',
+  'Вашингтон'
+];
+var wizardLastName = [
+  'да Марья',
+  'Верон',
+  'Мирабелла',
+  'Вальц',
+  'Онопко',
+  'Топольницкая',
+  'Нионго',
+  'Ирвинг'
+];
+var wizardCoatColar = [
+  'rgb(101, 137, 164)',
+  'rgb(241, 43, 107)',
+  'rgb(146, 100, 161)',
+  'rgb(56, 159, 117)',
+  'rgb(215, 210, 55)',
+  'rgb(0, 0, 0)'
+];
+var wizardEyesColor = [
+  'black',
+  'red',
+  'blue',
+  'yellow',
+  'green'
+];
 
 var getRndValue = function (arrayname) {
   var rendomIndex = Math.floor(Math.random() * arrayname.length);
-  var rendomValue = arrayname[rendomIndex];
-  return rendomValue;
+  return arrayname[rendomIndex];
 };
+
+/*Замечание по поводу цикла и получения атрибутов реализовал в основном проекте (сделал через конструктор) , не думаю что особо не правильно.
+Поэтому тут пока не изменял, жду пока там решение провериться
+*/
 
 var wizardAttribut = [
   {
