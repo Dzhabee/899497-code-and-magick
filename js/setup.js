@@ -1,5 +1,5 @@
 'use strict';
-
+var WIZARD_COUNT = 4;
 var userDialog = document.querySelector('.setup');
 userDialog.classList.remove('hidden');
 var similarListElement = userDialog.querySelector('.setup-similar-list');
@@ -45,32 +45,20 @@ var getRndValue = function (arrayname) {
   return arrayname[rendomIndex];
 };
 
-/*Замечание по поводу цикла и получения атрибутов реализовал в основном проекте (сделал через конструктор) , не думаю что особо не правильно.
-Поэтому тут пока не изменял, жду пока там решение провериться
-*/
+// конструктор для создания объектов (для цикла добавления данных в массив фогорафий пользователей)
+function CreateObject(name, coat, eyes) {
+  this.name = name;
+  this.coatColor = coat;
+  this.eyesColor = eyes;
+}
 
-var wizardAttribut = [
-  {
-    name: getRndValue(wizardName) + ' ' + getRndValue(wizardLastName),
-    coatColor: getRndValue(wizardCoatColar),
-    eyesColor: getRndValue(wizardEyesColor)
-  },
-  {
-    name: getRndValue(wizardName) + ' ' + getRndValue(wizardLastName),
-    coatColor: getRndValue(wizardCoatColar),
-    eyesColor: getRndValue(wizardEyesColor)
-  },
-  {
-    name: getRndValue(wizardName) + ' ' + getRndValue(wizardLastName),
-    coatColor: getRndValue(wizardCoatColar),
-    eyesColor: getRndValue(wizardEyesColor)
-  },
-  {
-    name: getRndValue(wizardName) + ' ' + getRndValue(wizardLastName),
-    coatColor: getRndValue(wizardCoatColar),
-    eyesColor: getRndValue(wizardEyesColor)
+var getWizardsTamplate = function () {
+  var wizards = [];
+  for (var i = 0; i < WIZARD_COUNT; i++) {
+    wizards.push(new CreateObject(getRndValue(wizardName) + ' ' + getRndValue(wizardLastName), getRndValue(wizardCoatColar), getRndValue(wizardEyesColor)));
   }
-];
+  return wizards;
+};
 
 var renderWizard = function (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
@@ -82,12 +70,12 @@ var renderWizard = function (wizard) {
 
 var renderWizards = function (wizards) {
   var fragment = document.createDocumentFragment();
-
-  for (var i = 0; i < wizards.length; i++) {
+  var count = wizards.length;
+  for (var i = 0; i < count; i++) {
     fragment.appendChild(renderWizard(wizards[i]));
   }
   similarListElement.appendChild(fragment);
 };
 
-renderWizards(wizardAttribut);
+renderWizards(getWizardsTamplate());
 document.querySelector('.setup-similar').classList.remove('hidden');
