@@ -1,7 +1,8 @@
 'use strict';
 var WIZARD_COUNT = 4;
 var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
+// userDialog.classList.remove('hidden');
+
 var similarListElement = userDialog.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 var wizardName = [
@@ -38,6 +39,14 @@ var wizardEyesColor = [
   'blue',
   'yellow',
   'green'
+];
+
+var fireballColors = [
+  '#ee4830',
+  '#30a8ee',
+  '#5ce6c0',
+  '#e848d5',
+  '#e6e848'
 ];
 
 var getRndValue = function (arrayname) {
@@ -79,3 +88,67 @@ var renderWizards = function (wizards) {
 
 renderWizards(getWizardsTamplate());
 document.querySelector('.setup-similar').classList.remove('hidden');
+
+// Лекция 4. Задание 1, 2
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
+
+var setupOpen = document.querySelector('.setup-open');
+var setup = document.querySelector('.setup');
+var setupClose = setup.querySelector('.setup-close');
+
+var onPopupEscPress = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE && !document.querySelector('.setup-user-name').focused) {
+    closePopup();
+  }
+};
+
+var openPopup = function () {
+  setup.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+};
+
+var closePopup = function () {
+  setup.classList.add('hidden');
+};
+
+setupOpen.addEventListener('click', function (evt) {
+  evt.preventDefault();
+  openPopup();
+});
+
+setupClose.addEventListener('click', function () {
+  closePopup();
+});
+
+setupOpen.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    openPopup();
+  }
+});
+
+setupClose.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    closePopup();
+  }
+});
+
+// Задание 3, 4, 5, 6
+var myWizard = document.querySelector('.setup-wizard');
+var myFireball = document.querySelector('.setup-fireball-wrap');
+var myWizardCoat = myWizard.querySelector('.wizard-coat');
+var myWizardEyes = myWizard.querySelector('.wizard-eyes');
+
+
+myWizardCoat.addEventListener('click', function () {
+  myWizardCoat.style.fill = getRndValue(wizardCoatColar);
+});
+
+myWizardEyes.addEventListener('click', function () {
+  myWizardEyes.style.fill = getRndValue(wizardEyesColor);
+});
+
+myFireball.addEventListener('click', function () {
+  myFireball.style.background = getRndValue(fireballColors);
+});
+
